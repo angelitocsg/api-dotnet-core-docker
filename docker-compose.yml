@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    plab-app:
+        container_name: todo_app
+        image: todo_app:1.0
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '80:80'
+        restart: on-failure
+        depends_on:
+            - plab-mysql
+
+    plab-mysql:
+        image: mysql
+        container_name: todo_database
+        environment:
+            - MYSQL_ROOT_PASSWORD=passWord
+            - MYSQL_DATABASE=OwnTodo
